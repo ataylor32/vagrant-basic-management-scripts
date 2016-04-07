@@ -24,8 +24,8 @@ fi
 
 echo "Please wait while the virtual machine's status is determined..."
 VAGRANT_STATUS=$(vagrant status --machine-readable)
-VAGRANT_MACHINE_NAME=$(echo "$VAGRANT_STATUS" | sed "2!d" | awk -F ",*" '{print $2}')
-VAGRANT_STATUS=$(echo "$VAGRANT_STATUS" | sed "2!d" | awk -F ",*" '{print $4}')
+VAGRANT_MACHINE_NAME=$(echo "$VAGRANT_STATUS" | egrep "^[0-9]+,.+,state,[^,]+$" | awk -F ",*" '{print $2}')
+VAGRANT_STATUS=$(echo "$VAGRANT_STATUS" | egrep "^[0-9]+,.+,state,[^,]+$" | awk -F ",*" '{print $4}')
 
 clear_screen
 echo -n "The \"$VAGRANT_MACHINE_NAME\" virtual machine is currently "

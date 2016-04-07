@@ -13,10 +13,12 @@ IF NOT EXIST Vagrantfile GOTO NoVagrantfile
 
 ECHO Please wait while the virtual machine's status is determined...
 
-FOR /F "skip=1 tokens=2,4* delims=," %%A IN ('vagrant status --machine-readable') DO (
-	SET VAGRANT_MACHINE_NAME=%%A
-	SET VAGRANT_STATUS=%%B
-	GOTO Continue
+FOR /F "skip=1 tokens=2-4* delims=," %%A IN ('vagrant status --machine-readable') DO (
+	IF %%B EQU state (
+		SET VAGRANT_MACHINE_NAME=%%A
+		SET VAGRANT_STATUS=%%C
+		GOTO Continue
+	)
 )
 
 :Continue
