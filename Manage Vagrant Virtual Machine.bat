@@ -51,44 +51,44 @@ ECHO.
 :Prompt
 SET /P num="Type a number and press enter: "
 
-IF %num% EQU 1 (
+IF "%num%" EQU "1" (
 	IF %VAGRANT_STATUS% NEQ running (
 		vagrant up
 	) ELSE (
 		ECHO The virtual machine is already running.
 		GOTO Prompt
 	)
-) ELSE IF %num% EQU 2 (
+) ELSE IF "%num%" EQU "2" (
 	IF %VAGRANT_STATUS% NEQ not_created (
 		vagrant reload
 	) ELSE (
 		ECHO The virtual machine hasn't been created, so it can't be restarted.
 		GOTO Prompt
 	)
-) ELSE IF %num% EQU 3 (
+) ELSE IF "%num%" EQU "3" (
 	IF %VAGRANT_STATUS% EQU running (
 		vagrant suspend
 	) ELSE (
 		ECHO The virtual machine isn't running, so it can't be suspended.
 		GOTO Prompt
 	)
-) ELSE IF %num% EQU 4 (
+) ELSE IF "%num%" EQU "4" (
 	IF %VAGRANT_STATUS% NEQ not_created IF %VAGRANT_STATUS% NEQ poweroff IF %VAGRANT_STATUS% NEQ aborted (
 		vagrant halt
 	) ELSE (
 		ECHO The virtual machine isn't running or suspended, so it can't be shut down.
 		GOTO Prompt
 	)
-) ELSE IF %num% EQU 5 (
+) ELSE IF "%num%" EQU "5" (
 	IF %VAGRANT_STATUS% NEQ not_created (
 		vagrant destroy
 	) ELSE (
 		ECHO The virtual machine hasn't been created, so it can't be destroyed.
 		GOTO Prompt
 	)
-) ELSE IF %num% EQU 6 (
+) ELSE IF "%num%" EQU "6" (
 	vagrant version
-) ELSE IF %num% EQU 7 (
+) ELSE IF "%num%" EQU "7" (
 	GOTO Exit
 ) ELSE (
 	ECHO Please enter a valid number.
